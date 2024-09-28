@@ -7,29 +7,30 @@
 
 import Foundation
 
-struct VolumeModel {
-    var title: String?
-    var subtitle: String?
-    var authors: [String]?
-    var textSnippet: String?
-    var description: String?
-    var smallThumbnail: String?
-    var thumbnail: String?
+public struct VolumeModel {
+    public var title: String?
+    public var subtitle: String?
+    public var authors: [String]?
+    public var description: String?
+    public var price: String?
+    public var thumbnail: String?
+    public var buyLink: URL?
     
     init(title: String?,
          subtitle: String?,
          authors: [String]?,
-         textSnippet: String?,
          description: String?,
          averageRating: Double?,
-         smallThumbnail: String?,
-         thumbnail: String?) {
+         price: String?,
+         thumbnail: String?,
+         buyLink: URL?
+    ){
         self.title = title
         self.subtitle = subtitle
         self.authors = authors
-        self.textSnippet = textSnippet
         self.description = description
-        self.smallThumbnail = smallThumbnail
+        self.price = price
         self.thumbnail = thumbnail
+        self.buyLink = buyLink
     }
 }

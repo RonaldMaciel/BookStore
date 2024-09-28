@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VolumeListResponse {
-    var totalItems: Int
-    var items: [VolumeModel]?
+public struct VolumeListResponse {
+    var totalItems: String
+    var books: [VolumeModel]?
 }
