@@ -9,20 +9,37 @@ import UIKit
 
 
 final class BooksTableViewController: UITableViewController {
+    // MARK: - Constants
+    
     private var books = ["BOOK 1", "BOOK 2", "BOOK 3"]
     
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
+        setupNavigationBar()
     }
-
+    
+    // MARK: - Configuration
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView?.rowHeight = 200
         tableView?.estimatedRowHeight = 200
     }
+    
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks,
+                                                           target: self,
+                                                           action: #selector(didTapFavoriteButton))
+    }
+    
+    @objc func didTapFavoriteButton() {
+
+    }
+
 
 }
  
@@ -40,6 +57,8 @@ extension BooksTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
         performSegue(withIdentifier: "BookCell", sender: self)
     }
 
