@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 
 final class BooksTableViewController: UITableViewController {
     
@@ -32,8 +32,8 @@ final class BooksTableViewController: UITableViewController {
     
     private func setupNavigationBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks,
-                                                           target: self,
-                                                           action: #selector(didTapFavoriteButton))
+                                                            target: self,
+                                                            action: #selector(didTapFavoriteButton))
     }
     
     @objc func didTapFavoriteButton() {
@@ -46,10 +46,11 @@ final class BooksTableViewController: UITableViewController {
     
     private func setupViewModel() {
         viewModel.delegate = self
+        viewModel.fetchBooks()
     }
-
+    
 }
- 
+
 // MARK: - UITableViewDataSource
 extension BooksTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,23 +59,38 @@ extension BooksTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let book = viewModel.allBooks[indexPath.row]
-    
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BookCell.identifier) as? BookCell else { return UITableViewCell() }
         
-        // cell.configure(with: book)
+        let book = viewModel.allBooks[indexPath.row]
+        
+        let bookImageString = viewModel.allBooksImagesURLString[indexPath.row]
+        let url = URL(string: bookImageString)
+        cell.thumbnailImageView.kf.setImage(with: url,
+                                            placeholder: nil,
+                                            options: nil,
+                                            progressBlock: nil,
+                                            completionHandler: { result in
+            switch result {
+            case .success(let data):
+                print("Image: \(data.image), from: \(data.cacheType)")
+                
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        })
+        
+        cell.configure(with: book.volumeInfo, bookImageURL: bookImageString)
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "BookCell", sender: self)
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as! BookDetailViewController
     }
-
 }
 
 // MARK: - UITableViewDelegate
