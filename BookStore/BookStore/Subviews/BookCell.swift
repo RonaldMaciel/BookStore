@@ -9,7 +9,7 @@ import UIKit
 
 final class BookCell: UITableViewCell {
     
-    // MARK: - Constants
+    // MARK: - Attributes
     public static let identifier: String = "BookCell"
     
     @IBOutlet weak var thumbnailImageView: UIImageView!
@@ -24,7 +24,7 @@ final class BookCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    // MARK: - Configuration
+    // MARK: - Setup & Configuration
     private func appearSmoothly() {
         contentView.alpha = 0
         

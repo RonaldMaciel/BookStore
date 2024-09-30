@@ -41,6 +41,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				ViewControllers/BookDetailViewController.swift,
+				ViewControllers/BooksViewModel.swift,
 			);
 			target = 96EFDEF52CA88DEF00CAC0CE /* BookStoreTests */;
 		};
