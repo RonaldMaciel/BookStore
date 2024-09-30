@@ -6,34 +6,25 @@
 //
 
 import Foundation
+import Alamofire
 
-public struct BookModel {
-    public var title: String?
-    public var subtitle: String?
-    public var authors: [String]?
-    public var description: String?
-    public var price: String?
-    public var isbn13: String?
-    public var thumbnail: String?
-    public var buyLink: URL?
+struct BookModel: Codable {
+    let title: String?
+    let subtitle: String?
+    let authors: [String]?
+    let description: String?
+    let imageLinks: ImageLinks?
     
-    init(title: String?,
-         subtitle: String?,
-         authors: [String]?,
-         description: String?,
-         averageRating: Double?,
-         price: String?,
-         isbn13: String?,
-         thumbnail: String?,
-         buyLink: URL?
-    ){
-        self.title = title
-        self.subtitle = subtitle
-        self.authors = authors
-        self.description = description
-        self.price = price
-        self.isbn13 = isbn13
-        self.thumbnail = thumbnail
-        self.buyLink = buyLink
+    struct ImageLinks: Codable {
+        let smallThumbnail: String?
+        let thumbnail: String?
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case title = "title"
+        case subtitle = "subtitle"
+        case authors = "authors"
+        case description = "description"
+        case imageLinks = "imageLinks"
     }
 }
