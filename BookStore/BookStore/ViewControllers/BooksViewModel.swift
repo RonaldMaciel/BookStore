@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol BooksViewModelDelegate: AnyObject {
     func didLoadEvents()
@@ -15,11 +16,28 @@ protocol BooksViewModelDelegate: AnyObject {
 public class BooksViewModel {
     weak var delegate: BooksViewModelDelegate?
     
-    public var apiClient = APIClient()
-    public var allBooks: [BookListResponse] = []
+    var apiClient = APIClient()
+    var allBooks: [Item] = []
+    var allBooksImagesURLString: [String] = []
     
     public func fetchBooks() {
-        // api call
+        apiClient.fetchBooks { apiData in
+            if apiData.totalItems == 0 {
+                self.delegate?.showErrorAlert(title: "Error!",
+                                              message: "Wasn't possible to load the books.")
+            } else {
+                self.allBooks = apiData.items
+                
+                for book in self.allBooks {
+                    if let bookImageURLString = book.volumeInfo.imageLinks?.smallThumbnail {
+                        if !(bookImageURLString.isEmpty) {
+                            self.allBooksImagesURLString.append(bookImageURLString)
+                        }
+                    }
+                }
+            }
+            
+            self.delegate?.didLoadEvents()
+        }
     }
-    
 }
