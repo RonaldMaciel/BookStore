@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 final class BookCell: UITableViewCell {
     
@@ -25,7 +26,7 @@ final class BookCell: UITableViewCell {
     }
     
     // MARK: - Setup & Configuration
-    private func appearSmoothly() {
+    func appearSmoothly() {
         contentView.alpha = 0
         
         UIView.animate(withDuration: 0.6) {
@@ -33,14 +34,11 @@ final class BookCell: UITableViewCell {
         }
     }
     
-    private func configure(with book: BookModel) {
-        //thumbnailImageView.image = book.thumbnail
+    func configure(with book: BookModel, bookImageURL: String) {
+        //thumbnailImageView.image = bookImage
         titleLabel.text = book.title
-        subtitleLabel.text = book.subtitle
-        
-        if let thumbnailURL = book.thumbnail {
-            
-        }
-        
+        subtitleLabel.text = book.description
     }
 }
+
+
