@@ -11,6 +11,7 @@ import Alamofire
 protocol BooksViewModelDelegate: AnyObject {
     func didLoadEvents()
     func showErrorAlert(title: String, message: String)
+    func showBookDetails(_ book: Item)
 }
 
 public class BooksViewModel {
@@ -39,5 +40,10 @@ public class BooksViewModel {
             
             self.delegate?.didLoadEvents()
         }
+    }
+    
+    public func didSelectBook(at index: Int) {
+        let book = allBooks[index]
+        delegate?.showBookDetails(book)
     }
 }

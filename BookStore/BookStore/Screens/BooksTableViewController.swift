@@ -37,7 +37,6 @@ final class BooksTableViewController: UITableViewController {
     }
     
     @objc func didTapFavoriteButton() {
-        
         // show favorites
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -48,18 +47,20 @@ final class BooksTableViewController: UITableViewController {
         viewModel.delegate = self
         viewModel.fetchBooks()
     }
-    
 }
 
 // MARK: - UITableViewDataSource
 extension BooksTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("\(self.viewModel.allBooks.count)")
         return self.viewModel.allBooks.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BookCell.identifier) as? BookCell else { return UITableViewCell() }
+        
+        cell.selectionStyle = .none
         
         let book = viewModel.allBooks[indexPath.row]
         
@@ -79,22 +80,21 @@ extension BooksTableViewController {
             }
         })
         
-        cell.configure(with: book.volumeInfo, bookImageURL: bookImageString)
+        cell.configure(with: book.volumeInfo)
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "BookCell", sender: self)
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as! BookDetailViewController
+        //destination.titleLabel.text = "aaaa"
     }
 }
 
 // MARK: - UITableViewDelegate
 extension BooksTableViewController: BooksViewModelDelegate {
+
     func didLoadEvents() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -104,6 +104,11 @@ extension BooksTableViewController: BooksViewModelDelegate {
         refreshControl?.endRefreshing()
     }
     
+    func showBookDetails(_ book: Item) {
+        performSegue(withIdentifier: "BookDetail", sender: self)
+    }
+    
+    
     // MARK: - Error Alert
     func showErrorAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
@@ -112,5 +117,9 @@ extension BooksTableViewController: BooksViewModelDelegate {
             self.viewModel.fetchBooks()
         })
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.didSelectBook(at: indexPath.row)
     }
 }
