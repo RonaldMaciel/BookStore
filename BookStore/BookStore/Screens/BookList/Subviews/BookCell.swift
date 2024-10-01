@@ -20,6 +20,7 @@ final class BookCell: UITableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         appearSmoothly()
         selectionStyle = .none
     }
@@ -28,16 +29,13 @@ final class BookCell: UITableViewCell {
     func appearSmoothly() {
         contentView.alpha = 0
         
-        UIView.animate(withDuration: 0.6) {
+        UIView.animate(withDuration: 0.73) {
             self.contentView.alpha = 1
         }
     }
     
     func configure(with book: BookModel) {
-        //thumbnailImageView.image = bookImage
         titleLabel.text = book.title
         subtitleLabel.text = book.description
     }
 }
-
-

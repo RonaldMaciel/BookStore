@@ -11,7 +11,7 @@ import Kingfisher
 final class BooksTableViewController: UITableViewController {
     
     // MARK: - Attributes
-    private let viewModel = BooksViewModel()
+    let viewModel = BooksViewModel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -19,6 +19,7 @@ final class BooksTableViewController: UITableViewController {
         
         setupTableView()
         setupNavigationBar()
+        setUpRefreshControl()
         setupViewModel()
     }
     
@@ -36,11 +37,23 @@ final class BooksTableViewController: UITableViewController {
                                                             action: #selector(didTapFavoriteButton))
     }
     
-    @objc func didTapFavoriteButton() {
+    
+    
+    @objc private func didTapFavoriteButton() {
         // show favorites
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+    
+    private func setUpRefreshControl() {
+        self.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: UIControl.Event.valueChanged)
+        
+    }
+    
+
+    @objc private func handleRefresh() {
+        viewModel.fetchBooks()
     }
     
     private func setupViewModel() {
@@ -87,8 +100,9 @@ extension BooksTableViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destination = segue.destination as! BookDetailViewController
-        //destination.titleLabel.text = "aaaa"
+        guard let destination = segue.destination as? BookDetailViewController else { return }
+        let book = sender as? Item
+        destination.viewModel.book = book
     }
 }
 
@@ -105,7 +119,7 @@ extension BooksTableViewController: BooksViewModelDelegate {
     }
     
     func showBookDetails(_ book: Item) {
-        performSegue(withIdentifier: "BookDetail", sender: self)
+        performSegue(withIdentifier: "BookDetail", sender: book)
     }
     
     

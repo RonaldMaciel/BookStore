@@ -21,6 +21,7 @@ public class BooksViewModel {
     var allBooks: [Item] = []
     var allBooksImagesURLString: [String] = []
     
+    
     public func fetchBooks() {
         apiClient.fetchBooks { apiData in
             if apiData.totalItems == 0 {

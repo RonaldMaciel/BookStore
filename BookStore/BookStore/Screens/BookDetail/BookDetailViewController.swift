@@ -7,8 +7,11 @@
 
 import UIKit
 
+
 class BookDetailViewController: UIViewController {
     
+    // MARK: - Attributes
+    let viewModel = BookDetailViewModel()
     
     // MARK: - Attributes
     @IBOutlet weak var titleLabel: UILabel!
@@ -22,14 +25,36 @@ class BookDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        setupViewModel()
+        configureBookDetails(with: viewModel.book!)
     }
+        
     
-
+    // MARK: - Configuration
+    private func setupViewModel() {
+        viewModel.delegate = self
+    }
     
 }
 
-extension BookDetailViewController {
-    
+// MARK: - EventDetailViewModelDelegate
+extension BookDetailViewController: BookDetailViewModelDelegate {
+    func configureBookDetails(with book: Item) {
+        titleLabel.text = book.volumeInfo.title
+        subtitleLabel.text = book.volumeInfo.subtitle
+        
+        let authorsStringFormatted = book.volumeInfo.authors?.joined(separator: ", ")
+        authorLabel.text = authorsStringFormatted
+        
+        guard let bookPrice = book.saleInfo.listPrice?.amount else {
+            return
+        }
+        
+        priceLabel.text = "$\(bookPrice)"
+        
+        
+       // priceLabel.text = "\(book.saleInfo.listPrice?.amount ??
+        descriptionLabel.text = book.volumeInfo.description
+    }
+
 }
