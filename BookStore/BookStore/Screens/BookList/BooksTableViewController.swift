@@ -11,14 +11,15 @@ import Kingfisher
 final class BooksTableViewController: UITableViewController {
     
     // MARK: - Attributes
-    let viewModel = BooksViewModel()
+    private let viewModel = BooksViewModel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
-        setupNavigationBar()
+        setupNavigationBarFavoriteButton()
+        setupSearchBar()
         setUpRefreshControl()
         setupViewModel()
     }
@@ -31,19 +32,25 @@ final class BooksTableViewController: UITableViewController {
         tableView?.estimatedRowHeight = 200
     }
     
-    private func setupNavigationBar() {
+    
+    private func setupNavigationBarFavoriteButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks,
                                                             target: self,
                                                             action: #selector(didTapFavoriteButton))
     }
     
+    private func setupSearchBar() {
+        navigationItem.searchController = UISearchController.defaultSearchController(searchBarDelegate: self,
+                                                                                     textFieldDelegate: self)
+    }
     
     
     @objc private func didTapFavoriteButton() {
-        // show favorites
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+        
+        print("\(viewModel.favorites)")
     }
     
     private func setUpRefreshControl() {
@@ -135,5 +142,31 @@ extension BooksTableViewController: BooksViewModelDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectBook(at: indexPath.row)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension BooksTableViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.text = String.empty
+        searchBar.resignFirstResponder()
+        
+        viewModel.cancelSearch()
+    }
+    
+}
+
+// MARK: - UITextFieldDelegate
+extension BooksTableViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
     }
 }

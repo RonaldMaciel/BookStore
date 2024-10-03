@@ -36,6 +36,10 @@ final class BookCell: UITableViewCell {
     
     func configure(with book: BookModel) {
         titleLabel.text = book.title
-        subtitleLabel.text = book.description
+        if book.subtitle != nil {
+            subtitleLabel.text = book.subtitle
+        } else {
+            subtitleLabel.text = book.description
+        }
     }
 }
