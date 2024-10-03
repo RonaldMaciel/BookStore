@@ -141,22 +141,25 @@
                                                 </constraints>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="buyButton">
-                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="19"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Buy Book">
+                                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="buyButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UVb-QW-Hxu"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUR-YJ-rCW">
-                                                <rect key="frame" x="12" y="658.33333333333337" width="369" height="36"/>
+                                                <rect key="frame" x="12" y="650.33333333333337" width="369" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="desc" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLV-bR-uER" userLabel="descriptionLabel">
-                                                <rect key="frame" x="12" y="706.33333333333337" width="369" height="100"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="14" baselineAdjustment="alignBaselines" showsExpansionTextWhenTruncated="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLV-bR-uER" userLabel="descriptionLabel">
+                                                <rect key="frame" x="12" y="698.33333333333337" width="369" height="210"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="shY-iU-s5J"/>
+                                                    <constraint firstAttribute="height" constant="210" id="47L-VN-OsZ"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -165,6 +168,9 @@
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="book" catalog="system"/>
+                                                <connections>
+                                                    <action selector="favoriteButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3jg-NQ-CC5"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -173,22 +179,21 @@
                                             <constraint firstAttribute="trailing" secondItem="sID-TM-fMz" secondAttribute="trailing" constant="12" id="AgY-Yq-odL"/>
                                             <constraint firstItem="AR6-EU-JLe" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="BLA-nB-bmc"/>
                                             <constraint firstItem="AR6-EU-JLe" firstAttribute="top" secondItem="sID-TM-fMz" secondAttribute="bottom" constant="12" id="Doy-mT-1CT"/>
+                                            <constraint firstItem="IUR-YJ-rCW" firstAttribute="top" secondItem="c6K-4v-U0J" secondAttribute="bottom" constant="12" id="GK1-ai-xMN"/>
                                             <constraint firstItem="sID-TM-fMz" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="GhN-uC-FM2"/>
-                                            <constraint firstItem="IUR-YJ-rCW" firstAttribute="top" secondItem="c6K-4v-U0J" secondAttribute="bottom" constant="20" id="I1W-Rl-7Nj"/>
                                             <constraint firstItem="8Ku-v3-wHG" firstAttribute="top" secondItem="CII-dI-rwH" secondAttribute="bottom" constant="20" id="JVf-9t-X9t"/>
                                             <constraint firstItem="c6K-4v-U0J" firstAttribute="top" secondItem="bZt-iz-p5m" secondAttribute="bottom" constant="20" id="Koe-61-UQ2"/>
-                                            <constraint firstItem="YLV-bR-uER" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="OGO-k6-9ju"/>
+                                            <constraint firstAttribute="trailing" secondItem="YLV-bR-uER" secondAttribute="trailing" constant="12" id="Nzb-IC-Js3"/>
                                             <constraint firstAttribute="trailing" secondItem="IUR-YJ-rCW" secondAttribute="trailing" constant="12" id="OGz-i2-rsC"/>
                                             <constraint firstItem="IUR-YJ-rCW" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="RDs-AJ-rL0"/>
+                                            <constraint firstItem="YLV-bR-uER" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="RZ1-r9-enL"/>
                                             <constraint firstAttribute="trailing" secondItem="CII-dI-rwH" secondAttribute="trailing" constant="12" id="Sma-y1-acX"/>
-                                            <constraint firstItem="YLV-bR-uER" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="Z3M-Yb-noj"/>
                                             <constraint firstItem="YLV-bR-uER" firstAttribute="top" secondItem="IUR-YJ-rCW" secondAttribute="bottom" constant="12" id="aOr-82-rRv"/>
-                                            <constraint firstAttribute="trailing" secondItem="YLV-bR-uER" secondAttribute="trailing" constant="12" id="f3h-L0-k5a"/>
                                             <constraint firstAttribute="trailing" secondItem="8Ku-v3-wHG" secondAttribute="trailing" constant="12" id="ia2-9m-Q1Z"/>
                                             <constraint firstItem="c6K-4v-U0J" firstAttribute="top" secondItem="8Ku-v3-wHG" secondAttribute="bottom" constant="20" id="iyf-pk-aQ8"/>
                                             <constraint firstItem="c6K-4v-U0J" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="j5U-LP-USN"/>
+                                            <constraint firstItem="YLV-bR-uER" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="jjZ-wM-PzK"/>
                                             <constraint firstItem="CII-dI-rwH" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="joe-or-4Mz"/>
-                                            <constraint firstAttribute="trailing" secondItem="YLV-bR-uER" secondAttribute="trailing" constant="12" id="lJU-af-5F6"/>
                                             <constraint firstItem="co7-7Q-83k" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="mtk-EG-BFr"/>
                                             <constraint firstItem="CII-dI-rwH" firstAttribute="top" secondItem="co7-7Q-83k" secondAttribute="bottom" constant="20" id="mxr-d1-sIk"/>
                                             <constraint firstAttribute="trailing" secondItem="c6K-4v-U0J" secondAttribute="trailing" constant="12" id="oE4-o1-IU5"/>
@@ -196,6 +201,7 @@
                                             <constraint firstAttribute="trailing" secondItem="AR6-EU-JLe" secondAttribute="trailing" constant="12" id="obS-CS-bJM"/>
                                             <constraint firstItem="8Ku-v3-wHG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bZt-iz-p5m" secondAttribute="trailing" constant="8" symbolic="YES" id="pvd-H2-ah2"/>
                                             <constraint firstItem="co7-7Q-83k" firstAttribute="top" secondItem="AR6-EU-JLe" secondAttribute="bottom" constant="12" id="pwn-D4-bVv"/>
+                                            <constraint firstItem="YLV-bR-uER" firstAttribute="top" secondItem="IUR-YJ-rCW" secondAttribute="bottom" constant="12" id="sAt-Dz-HmS"/>
                                             <constraint firstItem="bZt-iz-p5m" firstAttribute="top" secondItem="CII-dI-rwH" secondAttribute="bottom" constant="20" id="uQT-t6-X5J"/>
                                             <constraint firstItem="bZt-iz-p5m" firstAttribute="leading" secondItem="mRw-29-EIN" secondAttribute="leading" constant="12" id="wBC-7u-Xsz"/>
                                             <constraint firstItem="sID-TM-fMz" firstAttribute="top" secondItem="mRw-29-EIN" secondAttribute="top" constant="8" id="wv4-7V-M6d"/>
@@ -228,8 +234,9 @@
                     <connections>
                         <outlet property="authorLabel" destination="co7-7Q-83k" id="oRZ-De-juh"/>
                         <outlet property="bookImageView" destination="CII-dI-rwH" id="VFn-t3-mzb"/>
-                        <outlet property="buyBookButton" destination="c6K-4v-U0J" id="XFP-wW-eFj"/>
+                        <outlet property="buyBookButton" destination="c6K-4v-U0J" id="heX-Mj-u61"/>
                         <outlet property="descriptionLabel" destination="YLV-bR-uER" id="mIE-AQ-Fam"/>
+                        <outlet property="favoriteButton" destination="8Ku-v3-wHG" id="R5g-2S-FQH"/>
                         <outlet property="priceLabel" destination="bZt-iz-p5m" id="oYk-Rc-gsj"/>
                         <outlet property="subtitleLabel" destination="AR6-EU-JLe" id="luU-8C-SAt"/>
                         <outlet property="titleLabel" destination="sID-TM-fMz" id="tv0-pr-p4U"/>
@@ -246,10 +253,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
