@@ -6,14 +6,13 @@
 //
 
 import UIKit
-
+import Kingfisher
 
 class BookDetailViewController: UIViewController {
     
     // MARK: - Attributes
     let viewModel = BookDetailViewModel()
     
-    // MARK: - Attributes
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -22,6 +21,9 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var buyBookButton: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
+    
+    private var buyLinkString: String?
+    private var isFavorite: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,17 @@ class BookDetailViewController: UIViewController {
         viewModel.delegate = self
     }
     
+    @IBAction func favoriteButtonTapped(_ sender: Any) {
+        if isFavorite {
+            favoriteButton.tintColor = .black
+            isFavorite = false
+            
+        } else {
+            favoriteButton.tintColor = .orange
+            isFavorite = true
+        }
+    }
+    
 }
 
 // MARK: - EventDetailViewModelDelegate
@@ -46,14 +59,9 @@ extension BookDetailViewController: BookDetailViewModelDelegate {
         let authorsStringFormatted = book.volumeInfo.authors?.joined(separator: ", ")
         authorLabel.text = authorsStringFormatted
         
-        guard let bookPrice = book.saleInfo.listPrice?.amount else {
-            return
-        }
-        
+        guard let bookPrice = book.saleInfo.listPrice?.amount else { return }
         priceLabel.text = "$\(bookPrice)"
         
-        
-       // priceLabel.text = "\(book.saleInfo.listPrice?.amount ??
         descriptionLabel.text = book.volumeInfo.description
 
         guard let bookImageString = book.volumeInfo.imageLinks?.thumbnail else { return }
@@ -77,5 +85,13 @@ extension BookDetailViewController: BookDetailViewModelDelegate {
         }
         
     }
+    
+    @IBAction private func buyButtonTapped(_ sender: UIButton) {
 
+        guard let buyLinkStringToURL = viewModel.book?.saleInfo.buyLink else { return }
+        if let url = URL(string: buyLinkStringToURL) {
+            print("Buy link: \(buyLinkStringToURL)")
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
 }
