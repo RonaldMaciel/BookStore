@@ -55,6 +55,27 @@ extension BookDetailViewController: BookDetailViewModelDelegate {
         
        // priceLabel.text = "\(book.saleInfo.listPrice?.amount ??
         descriptionLabel.text = book.volumeInfo.description
+
+        guard let bookImageString = book.volumeInfo.imageLinks?.thumbnail else { return }
+        let url = URL(string: bookImageString)
+        bookImageView.kf.setImage(with: url,
+                                  placeholder: nil,
+                                  options: nil,
+                                  progressBlock: nil,
+                                  completionHandler: { result in
+            switch result {
+            case .success(let data):
+                print("Book Image: \(data.image.debugDescription), from: \(data.cacheType)")
+                
+            case .failure(let error):
+                print("Book Image Error: \(error)")
+            }
+        })
+        
+        if book.saleInfo.buyLink == nil {
+            buyBookButton.isHidden = true
+        }
+        
     }
 
 }

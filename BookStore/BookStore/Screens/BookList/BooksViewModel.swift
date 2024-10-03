@@ -20,7 +20,19 @@ public class BooksViewModel {
     var apiClient = APIClient()
     var allBooks: [Item] = []
     var allBooksImagesURLString: [String] = []
+    var shouldDisplaySearch: Bool = false
+    var bookName: String?
+    var filter: String?
+    var favorites: [Item] = []
     
+    // var books: [Item] {
+    //     if shouldDisplaySearch {
+    //         guard let filter = filter else { return [] }
+    //         return allBooks.filter({ $0.volumeInfo.title?.containsIgnoringCase(filter) })
+    //     }  else {
+    //         return allBooks
+    //     }
+    // }
     
     public func fetchBooks() {
         apiClient.fetchBooks { apiData in
@@ -31,9 +43,9 @@ public class BooksViewModel {
                 self.allBooks = apiData.items
                 
                 for book in self.allBooks {
-                    if let bookImageURLString = book.volumeInfo.imageLinks?.smallThumbnail {
-                        if !(bookImageURLString.isEmpty) {
-                            self.allBooksImagesURLString.append(bookImageURLString)
+                    if let bookThumbnailImageURLString = book.volumeInfo.imageLinks?.thumbnail {
+                        if !(bookThumbnailImageURLString.isEmpty) {
+                            self.allBooksImagesURLString.append(bookThumbnailImageURLString)
                         }
                     }
                 }
@@ -46,5 +58,17 @@ public class BooksViewModel {
     public func didSelectBook(at index: Int) {
         let book = allBooks[index]
         delegate?.showBookDetails(book)
+    }
+        
+    public func applySearch(withFilter filter: String) {
+        self.filter = filter
+        shouldDisplaySearch = true
+        delegate?.didLoadEvents()
+    }
+    
+    public func cancelSearch() {
+        filter = nil
+        shouldDisplaySearch = false
+        delegate?.didLoadEvents()
     }
 }
