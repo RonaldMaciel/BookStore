@@ -13,5 +13,5 @@ class BookDetailViewModel {
     
     weak var delegate: BookDetailViewModelDelegate?
     var book: Item?
-    
+    var favoriteBooks: [Item] = []
 }
