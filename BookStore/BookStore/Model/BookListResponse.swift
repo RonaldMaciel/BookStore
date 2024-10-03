@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct BookListResponse: Codable {
+struct BookListResponse: Codable {
     let totalItems: Int
     let items: [Item]
 }
@@ -41,8 +41,10 @@ struct SaleInfoListPrice: Codable {
 
 enum Country: String, Codable {
     case br = "BR"
+    case pt = "PT"
 }
 
 enum CurrencyCode: String, Codable {
     case brl = "BRL"
+    case eur = "EUR"
 }
