@@ -12,7 +12,7 @@ final class BooksTableViewController: UITableViewController {
     
     // MARK: - Attributes
     private let viewModel = BooksViewModel()
-    
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +55,7 @@ final class BooksTableViewController: UITableViewController {
     
     private func setUpRefreshControl() {
         self.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: UIControl.Event.valueChanged)
-        
     }
-    
 
     @objc private func handleRefresh() {
         viewModel.fetchBooks()
@@ -83,23 +81,6 @@ extension BooksTableViewController {
         cell.selectionStyle = .none
         
         let book = viewModel.allBooks[indexPath.row]
-        
-        let bookImageString = viewModel.allBooksImagesURLString[indexPath.row]
-        let url = URL(string: bookImageString)
-        cell.thumbnailImageView.kf.setImage(with: url,
-                                            placeholder: nil,
-                                            options: nil,
-                                            progressBlock: nil,
-                                            completionHandler: { result in
-            switch result {
-            case .success(let data):
-                print("Image: \(data.image), from: \(data.cacheType)")
-                
-            case .failure(let error):
-                print("Error: \(error)")
-            }
-        })
-        
         cell.configure(with: book.volumeInfo)
         
         return cell
@@ -107,9 +88,9 @@ extension BooksTableViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? BookDetailViewController else { return }
+        guard let destinationVC = segue.destination as? BookDetailViewController else { return }
         let book = sender as? Item
-        destination.viewModel.book = book
+        destinationVC.viewModel.book = book
     }
 }
 

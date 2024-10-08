@@ -6,7 +6,7 @@
 //
 
 protocol BookDetailViewModelDelegate: AnyObject {
-    func configureBookDetails(with book: Item)
+    func configureBookDetails()
 }
 
 class BookDetailViewModel {

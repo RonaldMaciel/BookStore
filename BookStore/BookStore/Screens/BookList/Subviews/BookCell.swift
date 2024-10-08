@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class BookCell: UITableViewCell {
     
@@ -41,5 +42,9 @@ final class BookCell: UITableViewCell {
         } else {
             subtitleLabel.text = book.description
         }
+        
+        let bookImageString = book.imageLinks?.smallThumbnail ?? ""
+        let url = URL(string: bookImageString)
+        thumbnailImageView.kf.setImage(with: url)
     }
 }

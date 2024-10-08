@@ -19,7 +19,7 @@ public class BooksViewModel {
     
     var apiClient = APIClient()
     var allBooks: [Item] = []
-    var allBooksImagesURLString: [String] = []
+    //var allBooksImagesURLString: [String] = []
     var shouldDisplaySearch: Bool = false
     var bookName: String?
     var filter: String?
@@ -42,13 +42,13 @@ public class BooksViewModel {
             } else {
                 self.allBooks = apiData.items
                 
-                for book in self.allBooks {
-                    if let bookThumbnailImageURLString = book.volumeInfo.imageLinks?.thumbnail {
-                        if !(bookThumbnailImageURLString.isEmpty) {
-                            self.allBooksImagesURLString.append(bookThumbnailImageURLString)
-                        }
-                    }
-                }
+               // for book in self.allBooks {
+               //     if let bookThumbnailImageURLString = book.volumeInfo.imageLinks?.thumbnail {
+               //         if !(bookThumbnailImageURLString.isEmpty) {
+               //             self.allBooksImagesURLString.append(bookThumbnailImageURLString)
+               //         }
+               //     }
+               // }
             }
             
             self.delegate?.didLoadEvents()

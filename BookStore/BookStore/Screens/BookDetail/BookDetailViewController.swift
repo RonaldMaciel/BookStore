@@ -28,7 +28,7 @@ class BookDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewModel()
-        configureBookDetails(with: viewModel.book!)
+        configureBookDetails()
     }
         
     
@@ -52,36 +52,38 @@ class BookDetailViewController: UIViewController {
 
 // MARK: - EventDetailViewModelDelegate
 extension BookDetailViewController: BookDetailViewModelDelegate {
-    func configureBookDetails(with book: Item) {
-        titleLabel.text = book.volumeInfo.title
-        subtitleLabel.text = book.volumeInfo.subtitle
+    func configureBookDetails() {
+        if let title = viewModel.book?.volumeInfo.title {
+            titleLabel.text = title
+        }
         
-        let authorsStringFormatted = book.volumeInfo.authors?.joined(separator: ", ")
-        authorLabel.text = authorsStringFormatted
+        if let subtitle = viewModel.book?.volumeInfo.subtitle {
+            subtitleLabel.text = subtitle
+        }
         
-        guard let bookPrice = book.saleInfo.listPrice?.amount else { return }
-        priceLabel.text = "$\(bookPrice)"
+        if let authors = viewModel.book?.volumeInfo.authors {
+            let authorsStringFormatted = authors.joined(separator: ", ")
+            authorLabel.text = authorsStringFormatted
+        }
         
-        descriptionLabel.text = book.volumeInfo.description
+        
+        if let bookPrice = viewModel.book?.saleInfo.listPrice?.amount {
+            priceLabel.text = "$\(String(describing: bookPrice))"
+        } else {
+            priceLabel.isHidden = true
+        }
+        
+        if let description = viewModel.book?.volumeInfo.description {
+            descriptionLabel.text = description
+        }
 
-        guard let bookImageString = book.volumeInfo.imageLinks?.thumbnail else { return }
-        let url = URL(string: bookImageString)
-        bookImageView.kf.setImage(with: url,
-                                  placeholder: nil,
-                                  options: nil,
-                                  progressBlock: nil,
-                                  completionHandler: { result in
-            switch result {
-            case .success(let data):
-                print("Book Image: \(data.image.debugDescription), from: \(data.cacheType)")
-                
-            case .failure(let error):
-                print("Book Image Error: \(error)")
-            }
-        })
+        if let bookImageString = viewModel.book?.volumeInfo.imageLinks?.thumbnail {
+            let url = URL(string: bookImageString)
+            bookImageView.kf.setImage(with: url)
+        }
         
-        if book.saleInfo.buyLink == nil {
-            buyBookButton.isHidden = true
+        if viewModel.book?.saleInfo.buyLink == nil {
+            buyBookButton.setTitle("Not for sale", for: .normal)
         }
         
     }
