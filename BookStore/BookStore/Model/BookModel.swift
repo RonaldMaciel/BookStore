@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-struct BookModel: Codable {
+class BookModel: Codable {
     
     let title: String?
     let subtitle: String?

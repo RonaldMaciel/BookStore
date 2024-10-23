@@ -12,6 +12,8 @@ protocol BooksViewModelDelegate: AnyObject {
     func didLoadEvents()
     func showErrorAlert(title: String, message: String)
     func showBookDetails(_ book: Item)
+    func showFavoriteBooks(_ books: [Item])
+    
 }
 
 public class BooksViewModel {
@@ -19,20 +21,10 @@ public class BooksViewModel {
     
     var apiClient = APIClient()
     var allBooks: [Item] = []
-    //var allBooksImagesURLString: [String] = []
     var shouldDisplaySearch: Bool = false
     var bookName: String?
     var filter: String?
     var favorites: [Item] = []
-    
-    // var books: [Item] {
-    //     if shouldDisplaySearch {
-    //         guard let filter = filter else { return [] }
-    //         return allBooks.filter({ $0.volumeInfo.title?.containsIgnoringCase(filter) })
-    //     }  else {
-    //         return allBooks
-    //     }
-    // }
     
     public func fetchBooks() {
         apiClient.fetchBooks { apiData in
@@ -41,14 +33,6 @@ public class BooksViewModel {
                                               message: "Wasn't possible to load the books.")
             } else {
                 self.allBooks = apiData.items
-                
-               // for book in self.allBooks {
-               //     if let bookThumbnailImageURLString = book.volumeInfo.imageLinks?.thumbnail {
-               //         if !(bookThumbnailImageURLString.isEmpty) {
-               //             self.allBooksImagesURLString.append(bookThumbnailImageURLString)
-               //         }
-               //     }
-               // }
             }
             
             self.delegate?.didLoadEvents()
@@ -58,6 +42,10 @@ public class BooksViewModel {
     public func didSelectBook(at index: Int) {
         let book = allBooks[index]
         delegate?.showBookDetails(book)
+    }
+    
+    public func didSelectFavorite() {
+        delegate?.showFavoriteBooks(favorites)
     }
         
     public func applySearch(withFilter filter: String) {
@@ -71,4 +59,6 @@ public class BooksViewModel {
         shouldDisplaySearch = false
         delegate?.didLoadEvents()
     }
+    
+    
 }

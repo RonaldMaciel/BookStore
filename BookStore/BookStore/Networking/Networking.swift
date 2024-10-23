@@ -14,7 +14,6 @@ public struct APIClient {
     public static let shared = APIClient()
     
     func fetchBooks(completion: @escaping (_ apiData: BookListResponse) -> Void) {
-        let url = "https://www.googleapis.com/books/v1/volumes?q=quilting"
         AF.request(url, method: .get,
                    parameters: nil,
                    encoding: URLEncoding.default,
@@ -25,10 +24,17 @@ public struct APIClient {
             case .success(let data):
                 do {
                     let jsonData = try JSONDecoder().decode(BookListResponse.self, from: data!)
+                    
+                    DispatchQueue.main.async {
+                        completion(jsonData)
+                    }
+                    
                     print("JSON DATA:\n \(jsonData)\n")
-                    completion(jsonData)
+
                 } catch {
-                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        print(error.localizedDescription)
+                    }
                 }
             case .failure(let error):
                 print("JSON Error: \(error.localizedDescription)")
@@ -59,9 +65,6 @@ public struct APIClient {
        //
        //}
     // }
-    
-    
-    
 }
 
 

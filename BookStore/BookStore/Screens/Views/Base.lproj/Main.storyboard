@@ -63,14 +63,53 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="BookStore" id="fLg-NC-0wd"/>
+                    <navigationItem key="navigationItem" title="BookStore" largeTitleDisplayMode="always" id="fLg-NC-0wd"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="BookDetail" id="uBI-h0-eeu"/>
+                        <segue destination="BNX-ye-Tjy" kind="show" identifier="FavoriteBooks" id="xhv-d7-k2q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmZ-Mm-um8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-761.06870229007632" y="-23.239436619718312"/>
+        </scene>
+        <!--Favorite Books-->
+        <scene sceneID="Fm5-0F-tXn">
+            <objects>
+                <viewController id="BNX-ye-Tjy" customClass="FavoriteBooksViewController" customModule="BookStore" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="auw-9V-9tm">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IW8-iP-g6r">
+                                <rect key="frame" x="0.0" y="155" width="393" height="663"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="183" id="281-Qj-QAk">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="183"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="281-Qj-QAk" id="RJ7-Us-G4u">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="183"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Uv8-K3-zDb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Uv8-K3-zDb" firstAttribute="bottom" secondItem="IW8-iP-g6r" secondAttribute="bottom" id="B10-bQ-nmR"/>
+                            <constraint firstItem="Uv8-K3-zDb" firstAttribute="trailing" secondItem="IW8-iP-g6r" secondAttribute="trailing" id="EzE-1I-Xnb"/>
+                            <constraint firstItem="IW8-iP-g6r" firstAttribute="top" secondItem="Uv8-K3-zDb" secondAttribute="top" id="Nwr-Wb-aQJ"/>
+                            <constraint firstItem="IW8-iP-g6r" firstAttribute="leading" secondItem="Uv8-K3-zDb" secondAttribute="leading" id="rfP-UE-7rY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Favorite Books" id="Ocm-eC-vvT"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IL2-3e-Z1M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="458.77862595419845" y="-422.53521126760563"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NbF-yN-CyU">
@@ -154,7 +193,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="14" baselineAdjustment="alignBaselines" showsExpansionTextWhenTruncated="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLV-bR-uER" userLabel="descriptionLabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" showsExpansionTextWhenTruncated="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLV-bR-uER" userLabel="descriptionLabel">
                                                 <rect key="frame" x="12" y="698.33333333333337" width="369" height="210"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="210" id="47L-VN-OsZ"/>
@@ -244,7 +283,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="142.74809160305344" y="-23.239436619718312"/>
+            <point key="canvasLocation" x="462" y="401"/>
         </scene>
     </scenes>
     <resources>

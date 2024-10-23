@@ -8,7 +8,7 @@
 import Foundation
 
 struct BookListResponse: Codable {
-    let totalItems: Int
+    let totalItems: Int!
     let items: [Item]
 }
 
