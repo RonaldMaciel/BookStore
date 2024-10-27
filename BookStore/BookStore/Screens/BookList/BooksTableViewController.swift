@@ -20,7 +20,6 @@ final class BooksTableViewController: UITableViewController {
         setupTableView()
         setupNavigationBarFavoriteButton()
         setupSearchBar()
-        setUpRefreshControl()
         setupViewModel()
     }
     
@@ -47,14 +46,6 @@ final class BooksTableViewController: UITableViewController {
     
     @objc private func didTapFavoriteButtonViewController() {
         viewModel.didSelectFavorite()
-    }
-    
-    private func setUpRefreshControl() {
-        self.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: UIControl.Event.valueChanged)
-    }
-
-    @objc private func handleRefresh() {
-        viewModel.fetchBooks()
     }
     
     private func setupViewModel() {
@@ -95,9 +86,6 @@ extension BooksTableViewController: BooksViewModelDelegate {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
-        // In case the list was updated by pull-refresh
-        refreshControl?.endRefreshing()
     }
     
     func showBookDetails(_ book: Item) {
@@ -110,22 +98,38 @@ extension BooksTableViewController: BooksViewModelDelegate {
         favoriteBookVC.viewModel.favorites = books
         navigationController?.pushViewController(favoriteBookVC, animated: true)
     }
-
+    
     
     // MARK: - Error Alert
     func showErrorAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Recarregar", style: UIAlertAction.Style.default) {
-            (alert: UIAlertAction!) in
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Recarregar",
+                                      style: UIAlertAction.Style.default) { (alert: UIAlertAction!) in
             self.viewModel.fetchBooks()
         })
+        
         self.present(alert, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectBook(at: indexPath.row)
     }
+    
+    // MARK: - Pagination
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let position = scrollView.contentOffset.y
+        
+        // position from the top of ScrollView, so we subtract the ScrollView height
+        if position > (scrollView.contentSize.height - (scrollView.frame.size.height * 2)) {
+            viewModel.fetchMoreBooks()
+        }
+    }
 }
+
 
 // MARK: - UISearchBarDelegate
 extension BooksTableViewController: UISearchBarDelegate {
