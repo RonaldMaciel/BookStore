@@ -26,17 +26,45 @@ public class BooksViewModel {
     var filter: String?
     var favorites: [Item] = []
     
+    var currentPage = 1
+    var isLoading = false
+    
     public func fetchBooks() {
+
+        guard !apiClient.isPaginating else { return }
+        
         apiClient.fetchBooks { apiData in
-            if apiData.totalItems == 0 {
-                self.delegate?.showErrorAlert(title: "Error!",
-                                              message: "Wasn't possible to load the books.")
-            } else {
-                self.allBooks = apiData.items
+            DispatchQueue.main.async {
+                if apiData.totalItems == 0 {
+                    self.delegate?.showErrorAlert(title: "Error!",
+                                                  message: "Wasn't possible to load the books.")
+                } else {
+                    self.allBooks.append(contentsOf: apiData.items)
+                    self.currentPage += 1
+                }
+                
+                self.delegate?.didLoadEvents()
             }
-            
-            self.delegate?.didLoadEvents()
         }
+    }
+    
+    public func fetchMoreBooks() {
+
+        guard !apiClient.isPaginating else { return }
+        
+        apiClient.fetchMoreBooks(pagination: true, with: currentPage) { apiData in
+            DispatchQueue.main.async {
+                if apiData.totalItems == 0 {
+                    self.delegate?.showErrorAlert(title: "Error!",
+                                                  message: "Wasn't possible to load the books.")
+                } else {
+                    self.allBooks.append(contentsOf: apiData.items)
+                    self.currentPage += 1
+                }
+            }
+        }
+        
+        self.delegate?.didLoadEvents()
     }
     
     public func didSelectBook(at index: Int) {
