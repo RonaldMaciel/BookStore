@@ -33,12 +33,23 @@ class FavoriteBooksViewController: UITableViewController {
     }
     
     private func setUpRefreshControl() {
-        self.refreshControl?.addTarget(self, action: #selector(handleRefresh), for: UIControl.Event.valueChanged)
+        lazy var refreshControl = UIRefreshControl()
         
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControl.Event.valueChanged)
+        
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
     }
     
     @objc private func handleRefresh() {
-        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        refreshControl?.endRefreshing()
     }
 }
 

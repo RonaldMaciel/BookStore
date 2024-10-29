@@ -30,11 +30,13 @@ public class BooksViewModel {
     var isLoading = false
     
     public func fetchBooks() {
-
-        guard !apiClient.isPaginating else { return }
+        
+        guard !isLoading else { return }
+        isLoading = true
         
         apiClient.fetchBooks { apiData in
             DispatchQueue.main.async {
+                self.isLoading = false
                 if apiData.totalItems == 0 {
                     self.delegate?.showErrorAlert(title: "Error!",
                                                   message: "Wasn't possible to load the books.")
@@ -50,10 +52,13 @@ public class BooksViewModel {
     
     public func fetchMoreBooks() {
 
-        guard !apiClient.isPaginating else { return }
+        guard !isLoading else { return }
+        isLoading = true
         
         apiClient.fetchMoreBooks(pagination: true, with: currentPage) { apiData in
             DispatchQueue.main.async {
+                self.isLoading = false
+                
                 if apiData.totalItems == 0 {
                     self.delegate?.showErrorAlert(title: "Error!",
                                                   message: "Wasn't possible to load the books.")

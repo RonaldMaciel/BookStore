@@ -12,12 +12,13 @@ final class BooksTableViewController: UITableViewController {
     
     // MARK: - Attributes
     private let viewModel = BooksViewModel()
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupTableView()
+        setUpRefreshControl()
         setupNavigationBarFavoriteButton()
         setupSearchBar()
         setupViewModel()
@@ -48,6 +49,26 @@ final class BooksTableViewController: UITableViewController {
         viewModel.didSelectFavorite()
     }
     
+    private func setUpRefreshControl() {
+        lazy var refreshControl = UIRefreshControl()
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControl.Event.valueChanged)
+        
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+    }
+    
+    @objc private func handleRefresh() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        refreshControl?.endRefreshing()
+    }
+    
     private func setupViewModel() {
         viewModel.delegate = self
         viewModel.fetchBooks()
@@ -63,7 +84,7 @@ extension BooksTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BookCell.identifier) as? BookCell else { return UITableViewCell() }
-
+        
         
         let book = viewModel.allBooks[indexPath.row]
         cell.configure(with: book.volumeInfo)
@@ -81,10 +102,11 @@ extension BooksTableViewController {
 
 // MARK: - UITableViewDelegate
 extension BooksTableViewController: BooksViewModelDelegate {
-
+    
     func didLoadEvents() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
         }
     }
     
@@ -144,7 +166,6 @@ extension BooksTableViewController: UISearchBarDelegate {
         
         viewModel.cancelSearch()
     }
-    
 }
 
 // MARK: - UITextFieldDelegate
