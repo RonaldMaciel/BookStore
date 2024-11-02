@@ -30,6 +30,7 @@ class FavoriteBooksViewController: UITableViewController {
     
     func setupViewModel() {
         viewModel.delegate = self
+        viewModel.fetchFavoriteBooks()
     }
     
     private func setUpRefreshControl() {
@@ -56,7 +57,7 @@ class FavoriteBooksViewController: UITableViewController {
 // MARK: - UITableViewDataSource
 extension FavoriteBooksViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.favorites.count
+        return viewModel.favorites.count
         
     }
     
