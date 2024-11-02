@@ -13,10 +13,12 @@ struct BookListResponse: Codable {
 }
 
 struct Item: Codable {
+    let id: String
     let volumeInfo: BookModel
     let saleInfo: SaleInfo
     
     enum CodingKeys: String, CodingKey {
+        case id = "id"
         case volumeInfo = "volumeInfo"
         case saleInfo = "saleInfo"
     }
