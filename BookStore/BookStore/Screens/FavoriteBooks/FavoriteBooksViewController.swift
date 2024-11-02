@@ -74,6 +74,10 @@ extension FavoriteBooksViewController {
 
 // MARK: - UITableViewDelegate
 extension FavoriteBooksViewController: FavoriteBooksViewModelDelegate {
+    func getFavoriteBook(with bookID: String) -> String {
+        userDefaults.getFavorite(bookID)
+    }
+    
     func didLoadEvents() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
