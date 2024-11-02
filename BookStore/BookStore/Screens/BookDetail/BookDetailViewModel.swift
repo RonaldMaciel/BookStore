@@ -12,7 +12,7 @@ protocol BookDetailViewModelDelegate: AnyObject {
     func deleteFavorite(_ book: Item)
     func setupBookDetails()
     func isFavoriteBook(_ value: Bool)
-    func getBook(_ bookID: String) -> Item
+    func checkBook(_ bookID: String) -> Bool
 }
 
 class BookDetailViewModel {
@@ -34,19 +34,11 @@ class BookDetailViewModel {
         delegate?.deleteFavorite(book)
     }
     
-    public func isFavorite(with book: Item) {
-        var newBook = delegate?.getBook(book.id)
-        
-        if newBook != nil {
-            delegate?.isFavoriteBook(true)
-        } else {
-            delegate?.isFavoriteBook(false)
+    public func checkIfFavorite(with book: Item) {
+        if let isFavorite = delegate?.checkBook(book.id) {
+            delegate?.isFavoriteBook(isFavorite)
         }
-       // if favoriteBooks.contains(where: { $0.id == book.id }) {
-       //     delegate?.isFavoriteBook(true)
-       // } else {
-       //     delegate?.isFavoriteBook(false)
-       // }
+        
     }
 }
 
@@ -59,16 +51,16 @@ extension UserDefaults {
         }
     }
     
-    func getFavorite(_ bookID: String) -> Item {
-        var newBookID = ""
+    func checkFavorite(_ bookID: String) -> Bool {
+        var isFavorite = false
         
         if let data = UserDefaults.standard.object(forKey: bookID) as? Data,
            let decodedBook = try? JSONDecoder().decode(Item.self, from: data) {
             print("decodedBook >> \(decodedBook)")
-            newBookID = decodedBook.id
+            isFavorite = true
         }
         
-        return UserDefaults.standard.object(forKey: newBookID) as! Item
+        return isFavorite
     }
     
     func removeFavorite(_ book: Item) {

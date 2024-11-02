@@ -49,12 +49,11 @@ class BookDetailViewController: UIViewController {
             isFavorite = false
             favoriteButton.tintColor = .black
             viewModel.removeFavorite(with: viewModel.book!)
-
         }
     }
     
     internal func configureBookDetails() {
-        //viewModel.isFavorite(with: viewModel.book!)
+        viewModel.checkIfFavorite(with: viewModel.book!)
     }
 }
 
@@ -79,8 +78,8 @@ extension BookDetailViewController: BookDetailViewModelDelegate {
         }
     }
     
-    func getBook(_ bookID: String) -> Item {
-        return userDefaults.getFavorite(bookID)
+    func checkBook(_ bookID: String) -> Bool {
+        return userDefaults.checkFavorite(bookID)
     }
     
     func setupBookDetails() {
