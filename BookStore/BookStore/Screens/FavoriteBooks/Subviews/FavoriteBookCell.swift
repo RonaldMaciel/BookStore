@@ -31,8 +31,9 @@ final class FavoriteBookCell: UITableViewCell {
         }
     }
     
-    func configure(with book: BookModel) {
-        titleLabel.text = book.title
+    func configure(with bookName: String) {
+        print("cell book name: \(bookName)")
+        titleLabel.text = bookName
     }
 }
 

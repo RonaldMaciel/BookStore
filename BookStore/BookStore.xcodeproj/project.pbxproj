@@ -16,6 +16,8 @@
 		960F7BBA2CADD65D003B2A09 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F7BB82CADD65D003B2A09 /* String+Extension.swift */; };
 		960F7BBD2CAE8EC7003B2A09 /* BookEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F7BBC2CAE8EC7003B2A09 /* BookEndpoint.swift */; };
 		960F7BBE2CAE8EC7003B2A09 /* BookEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F7BBC2CAE8EC7003B2A09 /* BookEndpoint.swift */; };
+		96101FAB2CD6ADF100FD6AF6 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96101FAA2CD6ADF100FD6AF6 /* UserDefaults+Extension.swift */; };
+		96101FAC2CD6ADF100FD6AF6 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96101FAA2CD6ADF100FD6AF6 /* UserDefaults+Extension.swift */; };
 		9622C86A2CAA44C10055A44E /* BookStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9622C8682CAA44C10055A44E /* BookStoreTests.swift */; };
 		9622C86E2CAA44C30055A44E /* BookStoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9622C86B2CAA44C30055A44E /* BookStoreUITests.swift */; };
 		9622C86F2CAA44C30055A44E /* BookStoreUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9622C86C2CAA44C30055A44E /* BookStoreUITestsLaunchTests.swift */; };
@@ -70,6 +72,7 @@
 		960F7BB42CADD592003B2A09 /* SearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchBar+Extension.swift"; sourceTree = "<group>"; };
 		960F7BB82CADD65D003B2A09 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		960F7BBC2CAE8EC7003B2A09 /* BookEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookEndpoint.swift; sourceTree = "<group>"; };
+		96101FAA2CD6ADF100FD6AF6 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		9622C8682CAA44C10055A44E /* BookStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreTests.swift; sourceTree = "<group>"; };
 		9622C86B2CAA44C30055A44E /* BookStoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreUITests.swift; sourceTree = "<group>"; };
 		9622C86C2CAA44C30055A44E /* BookStoreUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 		960F7BB72CADD597003B2A09 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				96101FAA2CD6ADF100FD6AF6 /* UserDefaults+Extension.swift */,
 				960F7BB42CADD592003B2A09 /* SearchBar+Extension.swift */,
 				960F7BB82CADD65D003B2A09 /* String+Extension.swift */,
 			);
@@ -187,8 +191,8 @@
 		967D70802CAA3DA200EA0799 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				967D707D2CAA3DA200EA0799 /* LaunchScreen.storyboard */,
 				967D707F2CAA3DA200EA0799 /* Main.storyboard */,
+				967D707D2CAA3DA200EA0799 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -554,6 +558,7 @@
 				96B95E7E2CAB516A00B39924 /* BookDetailViewController.swift in Sources */,
 				967D70952CAA3DA200EA0799 /* AppDelegate.swift in Sources */,
 				96EA4D532CB5BCC5008CB83D /* FavoriteBooksViewController.swift in Sources */,
+				96101FAB2CD6ADF100FD6AF6 /* UserDefaults+Extension.swift in Sources */,
 				967D70962CAA3DA200EA0799 /* SceneDelegate.swift in Sources */,
 				96EA4D562CB5BD6C008CB83D /* FavoriteBookCell.swift in Sources */,
 				96B95E812CAB525C00B39924 /* BookDetailViewModel.swift in Sources */,
@@ -575,6 +580,7 @@
 				96B95E7F2CAB516A00B39924 /* BookDetailViewController.swift in Sources */,
 				960F7BBA2CADD65D003B2A09 /* String+Extension.swift in Sources */,
 				960F7BB62CADD592003B2A09 /* SearchBar+Extension.swift in Sources */,
+				96101FAC2CD6ADF100FD6AF6 /* UserDefaults+Extension.swift in Sources */,
 				960F7BBE2CAE8EC7003B2A09 /* BookEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

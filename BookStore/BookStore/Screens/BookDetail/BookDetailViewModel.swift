@@ -23,14 +23,14 @@ class BookDetailViewModel {
     
     public func saveFavorite(with book: Item) {
         favoriteBooks.append(book)
-        print("saved book to favorites: \(favoriteBooks)\n")
+
         delegate?.saveFavorite(book)
     }
     
     public func removeFavorite(with book: Item) {
         // if let index = favoriteBooks.firstIndex(of: book) { favoriteBooks.remove(at: index) }
         favoriteBooks.removeAll(where: { $0.id == book.id })
-        print("removed book from favorites: \(favoriteBooks)")
+
         delegate?.deleteFavorite(book)
     }
     

@@ -40,7 +40,7 @@ extension UserDefaults {
     func getFavorite(_ bookID: String) -> String { // Item?
         var bookName = ""
         
-        if let data = UserDefaults.standard.object(forKey: "favoriteBook:\(bookID)") as? Data,
+        if let data = UserDefaults.standard.object(forKey: bookID) as? Data,
            let decodedBook = try? JSONDecoder().decode(Item.self, from: data) {
             bookName = decodedBook.volumeInfo.title!
         }

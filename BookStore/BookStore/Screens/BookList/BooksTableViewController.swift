@@ -114,10 +114,9 @@ extension BooksTableViewController: BooksViewModelDelegate {
         performSegue(withIdentifier: "BookDetail", sender: book)
     }
     
-    func showFavoriteBooks(_ favoriteBooks: [Item]) {
+    func showFavoriteBooks() {
         let favoriteBookVC = FavoriteBooksViewController()
         favoriteBookVC.title = "Favorite Books"
-        favoriteBookVC.viewModel.favorites = favoriteBooks
         navigationController?.pushViewController(favoriteBookVC, animated: true)
     }
     

@@ -12,8 +12,7 @@ protocol BooksViewModelDelegate: AnyObject {
     func didLoadEvents()
     func showErrorAlert(title: String, message: String)
     func showBookDetails(_ book: Item)
-    func showFavoriteBooks(_ books: [Item])
-    
+    func showFavoriteBooks()
 }
 
 public class BooksViewModel {
@@ -78,7 +77,7 @@ public class BooksViewModel {
     }
     
     public func didSelectFavorite() {
-        delegate?.showFavoriteBooks(favorites)
+        delegate?.showFavoriteBooks()
     }
         
     public func applySearch(withFilter filter: String) {
