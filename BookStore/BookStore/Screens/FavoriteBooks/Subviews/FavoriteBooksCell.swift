@@ -1,5 +1,5 @@
 //
-//  FavoriteBookCell.swift
+//  FavoriteBooksCell.swift
 //  BookStore
 //
 //  Created by Ronald on 08/10/24.
@@ -7,10 +7,11 @@
 
 import UIKit
 
-final class FavoriteBookCell: UITableViewCell {
+final class FavoriteBooksCell: UITableViewCell {
     
     // MARK: - Attributes
-    public static let identifier: String = "FavoriteBookCell"
+    public static let identifier: String = "FavoriteBooksCell"
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     // MARK: - Lifecycle

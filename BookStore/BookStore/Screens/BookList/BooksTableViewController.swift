@@ -34,13 +34,13 @@ final class BooksTableViewController: UITableViewController {
     
     
     private func setupNavigationBarFavoriteButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks,
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks,
                                                             target: self,
                                                             action: #selector(didTapFavoriteButtonViewController))
     }
     
     private func setupSearchBar() {
-        navigationItem.searchController = UISearchController.defaultSearchController(searchBarDelegate: self,
+        self.navigationItem.searchController = UISearchController.defaultSearchController(searchBarDelegate: self,
                                                                                      textFieldDelegate: self)
     }
     
@@ -115,9 +115,7 @@ extension BooksTableViewController: BooksViewModelDelegate {
     }
     
     func showFavoriteBooks() {
-        let favoriteBookVC = FavoriteBooksViewController()
-        favoriteBookVC.title = "Favorite Books"
-        navigationController?.pushViewController(favoriteBookVC, animated: true)
+        performSegue(withIdentifier: "FavoriteBooks", sender: FavoriteBooksViewController())
     }
     
     

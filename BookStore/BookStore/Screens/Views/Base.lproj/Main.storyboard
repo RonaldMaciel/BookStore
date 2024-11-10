@@ -55,6 +55,7 @@
                                         <constraint firstItem="Jfa-FO-kTN" firstAttribute="bottom" secondItem="7lN-QG-7Ox" secondAttribute="bottomMargin" constant="12" id="wBy-uy-ank"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="subtitleLabel" destination="wPh-0n-Gzc" id="mF9-e8-72E"/>
                                     <outlet property="thumbnailImageView" destination="Jfa-FO-kTN" id="Sz3-li-nGB"/>
@@ -62,54 +63,66 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="KJt-GF-f5Z" id="svM-6K-mKU"/>
+                            <outlet property="delegate" destination="KJt-GF-f5Z" id="zez-IK-NPH"/>
+                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="BookStore" largeTitleDisplayMode="always" id="fLg-NC-0wd"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="BookDetail" id="uBI-h0-eeu"/>
-                        <segue destination="BNX-ye-Tjy" kind="show" identifier="FavoriteBooks" id="xhv-d7-k2q"/>
+                        <segue destination="3BT-6L-Yup" kind="show" identifier="FavoriteBooks" id="qxJ-Kv-3id"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmZ-Mm-um8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-761.06870229007632" y="-23.239436619718312"/>
+            <point key="canvasLocation" x="-563" y="-23"/>
         </scene>
-        <!--Favorite Books-->
-        <scene sceneID="Fm5-0F-tXn">
+        <!--Favorite Books View Controller-->
+        <scene sceneID="wWA-xy-0Ky">
             <objects>
-                <viewController id="BNX-ye-Tjy" customClass="FavoriteBooksViewController" customModule="BookStore" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="auw-9V-9tm">
+                <tableViewController id="3BT-6L-Yup" customClass="FavoriteBooksViewController" customModule="BookStore" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="iH4-z8-y9n">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IW8-iP-g6r">
-                                <rect key="frame" x="0.0" y="155" width="393" height="663"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="183" id="281-Qj-QAk">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="183"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="281-Qj-QAk" id="RJ7-Us-G4u">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="183"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Uv8-K3-zDb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Uv8-K3-zDb" firstAttribute="bottom" secondItem="IW8-iP-g6r" secondAttribute="bottom" id="B10-bQ-nmR"/>
-                            <constraint firstItem="Uv8-K3-zDb" firstAttribute="trailing" secondItem="IW8-iP-g6r" secondAttribute="trailing" id="EzE-1I-Xnb"/>
-                            <constraint firstItem="IW8-iP-g6r" firstAttribute="top" secondItem="Uv8-K3-zDb" secondAttribute="top" id="Nwr-Wb-aQJ"/>
-                            <constraint firstItem="IW8-iP-g6r" firstAttribute="leading" secondItem="Uv8-K3-zDb" secondAttribute="leading" id="rfP-UE-7rY"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Favorite Books" id="Ocm-eC-vvT"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IL2-3e-Z1M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="FavoriteBooksCell" rowHeight="139" id="Qub-1L-uVD" customClass="FavoriteBooksCell" customModule="BookStore" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="139"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qub-1L-uVD" id="2jL-e1-5nv">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="139"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJY-St-SaH">
+                                            <rect key="frame" x="36" y="19" width="321" height="101"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="dJY-St-SaH" firstAttribute="top" secondItem="2jL-e1-5nv" secondAttribute="topMargin" constant="8" id="Avx-6K-ri4"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="dJY-St-SaH" secondAttribute="trailing" constant="16" id="Kaa-Sx-Tok"/>
+                                        <constraint firstItem="dJY-St-SaH" firstAttribute="leading" secondItem="2jL-e1-5nv" secondAttribute="leadingMargin" constant="16" id="SbV-x4-LuX"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="dJY-St-SaH" secondAttribute="bottom" constant="8" id="Y5j-Tv-INE"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="dJY-St-SaH" id="N51-K7-6CD"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="3BT-6L-Yup" id="lVt-L6-LkQ"/>
+                            <outlet property="delegate" destination="3BT-6L-Yup" id="ph6-dN-PLe"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Uo1-9u-Ubd"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J7V-C5-RDv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="458.77862595419845" y="-422.53521126760563"/>
+            <point key="canvasLocation" x="896.94656488549617" y="-486.61971830985919"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NbF-yN-CyU">
@@ -283,7 +296,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="462" y="401"/>
+            <point key="canvasLocation" x="966" y="404"/>
         </scene>
     </scenes>
     <resources>

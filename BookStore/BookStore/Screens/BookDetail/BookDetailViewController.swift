@@ -87,9 +87,9 @@ extension BookDetailViewController: BookDetailViewModelDelegate {
             titleLabel.text = title
         }
         
-        if let subtitle = viewModel.book?.volumeInfo.subtitle {
-            subtitleLabel.text = subtitle
-        }
+        if viewModel.book?.volumeInfo.subtitle != nil {
+            subtitleLabel.text = viewModel.book?.volumeInfo.subtitle
+        } else { subtitleLabel.text = "" }
         
         if let authors = viewModel.book?.volumeInfo.authors {
             let authorsStringFormatted = authors.joined(separator: ", ")
