@@ -1,4 +1,4 @@
-# iOS BookStore App - Google Books API 
+# iOS BookStore - Google Books API 
 
 
 ![](https://badgen.net/badge/iOS/17/blue) ![](https://badgen.net/badge/Swift/5/orange)
@@ -11,7 +11,7 @@ I chose MVVM due to the separation of concerns between the components that the a
 For third-party library I used Alamofire to simplify the process of performing network operations and handling server responses and Kingfisher for it's performace when it comes to images. Data persistence with User Defaults has also been implemented to create a list of the user's favorite books, and items can be added or removed from the list.
 
 ## Screenshots
-<img src="Screenshots/booklist.png" alt="alt text" width="300"> <img src="Screenshots/bookdetail.png" alt="alt text" width="300"> <img src="Screenshots/booksfavorite.png" alt="alt text" width="300">
+<img src="Screenshots/booklist.png" alt="alt text" width="280"> <img src="Screenshots/bookdetail.png" alt="alt text" width="280"> <img src="Screenshots/booksfavorite.png" alt="alt text" width="280">
 
 ## Main Features:
 - List of iOS Books using UITableView
